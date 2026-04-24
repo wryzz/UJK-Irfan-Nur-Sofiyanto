@@ -157,8 +157,8 @@ http://localhost:3000
 
 | Role    | Email                    | Password     |
 |---------|--------------------------|--------------|
-| Admin   | admin@perpustakaan.com   | `admin123`   |
-| Petugas | budi@perpustakaan.com    | `petugas123` |
+| Admin   | admin_irfan@perpustakaan.com   | `admin123`   |
+| Petugas | irfan@perpustakaan.com    | `petugas123` |
 
 ---
 
