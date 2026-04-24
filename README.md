@@ -185,5 +185,4 @@ http://localhost:3000
 
 ## 🎓 Penutup
 
-> Proyek **BiblioTech** dibuat untuk memenuhi tugas **Uji Kompetensi Kejuruan (UJK)** pada mata kuliah Pemrograman Web.  
-> Dikembangkan dengan oleh **Irfan Nur Sofiyanto** — NIM 220103179, Kelas 22TIA6.
+> Proyek **BiblioTech** dibuat untuk memenuhi tugas **Uji Kompetensi Kejuruan (UJK)**
