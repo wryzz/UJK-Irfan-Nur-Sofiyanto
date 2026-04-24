@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiblioTech — Sistem Perpustakaan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ══════════════════════════════════════
+       LOGIN PAGE
+  ══════════════════════════════════════════ -->
+  <div id="page-login" class="page active">
+    <div class="login-split">
+
+      <!-- Kiri: Branding -->
+      <div class="login-brand">
+        <div class="brand-decor">
+          <div class="circle c1"></div>
+          <div class="circle c2"></div>
+          <div class="circle c3"></div>
+        </div>
+        <div class="brand-content">
+          <span class="brand-icon">📚</span>
+          <h1>Biblio<em>Tech</em></h1>
+          <p>Sistem Manajemen Perpustakaan Digital</p>
+          <div class="brand-features">
+            <div class="feat"><span>📖</span> Kelola Koleksi Buku</div>
+            <div class="feat"><span>👥</span> Manajemen Pengguna</div>
+            <div class="feat"><span>📊</span> Dashboard & Statistik</div>
+            <div class="feat"><span>🔒</span> Keamanan JWT Token</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kanan: Form Login -->
+      <div class="login-form-wrap">
+        <div class="login-card">
+          <div class="login-header">
+            <h2>Masuk ke Akun</h2>
+            <p>Selamat datang kembali! Silakan masuk untuk melanjutkan.</p>
+          </div>
+
+          <form id="form-login">
+            <div class="field-group" style="margin-bottom:16px">
+              <label>Alamat Email</label>
+              <input type="email" id="login-email" placeholder="email@perpustakaan.com" required />
+            </div>
+            <div class="field-group" style="margin-bottom:20px">
+              <label>Password</label>
+              <div class="input-wrap">
+                <input type="password" id="login-password" placeholder="••••••••" required />
+                <button type="button" class="toggle-pw" onclick="togglePw()">👁</button>
+              </div>
+            </div>
+            <div id="login-error" class="alert alert-error" style="display:none;margin-bottom:14px"></div>
+            <button type="submit" class="btn-primary btn-full" id="btn-login">Masuk</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       DASHBOARD PAGE
+  ══════════════════════════════════════════ -->
+  <div id="page-dashboard" class="page">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-icon">📚</span>
+        <span class="logo-text">Biblio<span>Tech</span></span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">Menu Utama</div>
+        <a href="#" class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+          <span class="nav-icon">🏠</span><span>Dashboard</span>
+        </a>
+
+        <div class="nav-label">Perpustakaan</div>
+        <a href="#" class="nav-item" data-page="buku" onclick="navigate('buku')">
+          <span class="nav-icon">📖</span><span>Data Buku</span>
+        </a>
+
+        <div class="nav-label nav-admin">Administrasi</div>
+        <a href="#" class="nav-item nav-admin" data-page="users" onclick="navigate('users')">
+          <span class="nav-icon">👥</span><span>Pengguna</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-info">
+            <div class="user-avatar" id="nav-avatar">A</div>
+            <div>
+              <div class="user-name" id="nav-name">Admin</div>
+              <div class="user-role" id="nav-role">admin</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">🚪 Keluar</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="topbar">
+        <button class="btn-hamburger" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <div class="topbar-user" id="topbar-user"></div>
+      </div>
+
+      <!-- Dashboard -->
+      <section id="section-dashboard" class="content-section active">
+        <div class="page-header">
+          <div>
+            <h2>Dashboard</h2>
+            <p>Ringkasan data sistem perpustakaan</p>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card s-blue">
+            <div class="stat-icon si-blue">📚</div>
+            <div><div class="stat-value" id="stat-buku">—</div><div class="stat-label">Total Judul Buku</div></div>
+          </div>
+          <div class="stat-card s-green">
+            <div class="stat-icon si-green">📦</div>
+            <div><div class="stat-value" id="stat-stok">—</div><div class="stat-label">Total Stok</div></div>
+          </div>
+          <div class="stat-card s-amber">
+            <div class="stat-icon si-amber">🏷️</div>
+            <div><div class="stat-value" id="stat-kategori">—</div><div class="stat-label">Kategori</div></div>
+          </div>
+          <div class="stat-card s-purple">
+            <div class="stat-icon si-terra">👤</div>
+            <div><div class="stat-value" id="stat-user">—</div><div class="stat-label">Pengguna</div></div>
+          </div>
+        </div>
+        <div class="dashboard-bottom">
+          <div class="card recent-card">
+            <div class="card-header">
+              <h3>Buku Terbaru</h3>
+              <button class="btn-sm" onclick="navigate('buku')">Lihat Semua →</button>
+            </div>
+            <div id="recent-buku-list"></div>
+          </div>
+          <div class="card info-card">
+            <h3>Info Akun</h3>
+            <div id="account-info" class="account-info"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Buku -->
+      <section id="section-buku" class="content-section">
+        <div class="page-header">
+          <div><h2>Data Buku</h2><p>Kelola koleksi buku perpustakaan</p></div>
+          <button class="btn-primary" onclick="openModalBuku()">+ Tambah Buku</button>
+        </div>
+        <div class="filter-bar">
+          <input type="text" id="search-buku" placeholder="🔍  Cari judul, pengarang, ISBN..." oninput="debounceSearch()" />
+          <select id="filter-kategori" onchange="loadBuku()">
+            <option value="">Semua Kategori</option>
+            <option>Sastra</option><option>Sejarah</option><option>Teknologi</option>
+            <option>Ekonomi</option><option>Pengembangan Diri</option>
+            <option>Sains</option><option>Agama</option><option>Lainnya</option>
+          </select>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>#</th><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Tahun</th><th>Stok</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="tbody-buku">
+                <tr><td colspan="7" class="loading-row">Memuat data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Pengguna -->
+      <section id="section-users" class="content-section">
+        <div class="page-header">
+          <div><h2>Data Pengguna</h2><p>Manajemen akun sistem</p></div>
+          <button class="btn-primary" onclick="openModalUser()">+ Tambah Pengguna</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>#</th><th>Nama</th><th>Email</th><th>Role</th><th>Terdaftar</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="tbody-users">
+                <tr><td colspan="6" class="loading-row">Memuat data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       WELCOME MODAL — SELAMAT DATANG
+  ══════════════════════════════════════════ -->
+  <div id="modal-welcome" class="open" style="display:none">
+    <div class="welcome-overlay" onclick="closeWelcome()"></div>
+    <div class="welcome-box">
+      <!-- Header: diisi JS sesuai role -->
+      <div id="welcome-header"></div>
+
+      <!-- Body -->
+      <div class="welcome-body">
+        <p class="welcome-greeting" id="welcome-greeting">
+          Selamat datang kembali!
+        </p>
+
+        <div class="welcome-time" id="welcome-time"></div>
+
+        <!-- Akses menu sesuai role -->
+        <div class="welcome-items" id="welcome-items"></div>
+
+        <button class="btn-primary btn-full" onclick="closeWelcome()" style="margin-top:4px">
+          Mulai Bekerja →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MODAL BUKU ── -->
+  <div class="modal-overlay" id="modal-buku" onclick="closeModal('modal-buku')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-buku-title">Tambah Buku</h3>
+        <button class="btn-close" onclick="closeModal('modal-buku')">✕</button>
+      </div>
+      <form id="form-buku">
+        <input type="hidden" id="buku-id" />
+        <div class="form-grid">
+          <div class="field-group span-2">
+            <label>Judul Buku *</label>
+            <input type="text" id="buku-judul" required placeholder="Masukkan judul buku" />
+          </div>
+          <div class="field-group">
+            <label>Pengarang *</label>
+            <input type="text" id="buku-pengarang" required placeholder="Nama pengarang" />
+          </div>
+          <div class="field-group">
+            <label>Penerbit *</label>
+            <input type="text" id="buku-penerbit" required placeholder="Nama penerbit" />
+          </div>
+          <div class="field-group">
+            <label>Tahun Terbit *</label>
+            <input type="number" id="buku-tahun" required min="1900" max="2099" placeholder="2024" />
+          </div>
+          <div class="field-group">
+            <label>ISBN</label>
+            <input type="text" id="buku-isbn" placeholder="978-xxx-xxx-xxx-x" />
+          </div>
+          <div class="field-group">
+            <label>Kategori *</label>
+            <select id="buku-kategori" required>
+              <option value="">Pilih kategori</option>
+              <option>Sastra</option><option>Sejarah</option><option>Teknologi</option>
+              <option>Ekonomi</option><option>Pengembangan Diri</option>
+              <option>Sains</option><option>Agama</option><option>Lainnya</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Stok</label>
+            <input type="number" id="buku-stok" min="0" value="0" />
+          </div>
+          <div class="field-group span-2">
+            <label>Deskripsi</label>
+            <textarea id="buku-deskripsi" rows="3" placeholder="Deskripsi singkat buku..."></textarea>
+          </div>
+        </div>
+        <div id="modal-buku-error" class="alert alert-error" style="display:none;margin:0 24px 4px"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-buku')">Batal</button>
+          <button type="submit" class="btn-primary" id="btn-submit-buku">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── MODAL USER ── -->
+  <div class="modal-overlay" id="modal-user" onclick="closeModal('modal-user')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-user-title">Tambah Pengguna</h3>
+        <button class="btn-close" onclick="closeModal('modal-user')">✕</button>
+      </div>
+      <form id="form-user">
+        <input type="hidden" id="user-id" />
+        <div class="form-grid">
+          <div class="field-group span-2">
+            <label>Nama Lengkap *</label>
+            <input type="text" id="user-nama" required placeholder="Nama lengkap" />
+          </div>
+          <div class="field-group">
+            <label>Email *</label>
+            <input type="email" id="user-email" required placeholder="email@contoh.com" />
+          </div>
+          <div class="field-group">
+            <label>Role *</label>
+            <select id="user-role" required>
+              <option value="petugas">Petugas</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="field-group span-2">
+            <label id="pw-label">Password *</label>
+            <input type="password" id="user-password" placeholder="Minimal 6 karakter" />
+            <small class="hint" id="pw-hint" style="display:none">Kosongkan jika tidak ingin mengubah password</small>
+          </div>
+        </div>
+        <div id="modal-user-error" class="alert alert-error" style="display:none;margin:0 24px 4px"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-user')">Batal</button>
+          <button type="submit" class="btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── TOAST ── -->
+  <div id="toast" class="toast"></div>
+
+  <!-- ── CONFIRM ── -->
+  <div class="modal-overlay" id="modal-confirm" style="display:none">
+    <div class="modal-box confirm-box" onclick="event.stopPropagation()">
+      <div class="confirm-icon">⚠️</div>
+      <h3 id="confirm-title">Konfirmasi</h3>
+      <p id="confirm-msg">Apakah Anda yakin?</p>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeModal('modal-confirm')">Batal</button>
+        <button class="btn-danger" id="btn-confirm-ok">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- #app -->
+
+<script src="/js/app.js"></script>
+</body>
+</html>
