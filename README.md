@@ -1,165 +1,200 @@
-📚 BiblioTech — Sistem Manajemen Perpustakaan
-👤 Identitas Mahasiswa
+<div align="center">
 
-| Field | Detail |
-|-------|--------|
-| **Nama** | [Irfan Nur Sofiyanto] |
-| **NIM** | [220103179] |
-| **Kelas** | [22TIA6] |
-| **Mata Kuliah** | Pemrograman Web |
-| **Dosen** | [Bapak Sopingi] |
+# 📚 BiblioTech — Sistem Manajemen Perpustakaan
 
----
+Aplikasi web berbasis **Node.js + Express.js** untuk mengelola data perpustakaan secara digital.
+Dilengkapi dengan sistem autentikasi, fitur CRUD lengkap, pencarian & filter kategori, serta dashboard monitoring.
 
-📖 Tema Kasus: Sistem Manajemen Perpustakaan
+![Node.js](https://img.shields.io/badge/Node.js-16+-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 
-Aplikasi **BiblioTech** adalah sistem manajemen perpustakaan digital yang memungkinkan petugas dan admin perpustakaan untuk mengelola koleksi buku secara efisien. Sistem ini menyelesaikan masalah pengelolaan data buku yang selama ini masih dilakukan secara manual atau menggunakan spreadsheet sederhana.
+</div>
 
 ---
 
-🗃️ Struktur Database
+## 📦 Daftar Isi
 
-Tabel 1: `users` (Autentikasi)
-| Kolom | Tipe | Keterangan |
-|-------|------|-----------|
-| id | INTEGER PK | Auto increment |
-| nama | TEXT | Nama lengkap pengguna |
-| email | TEXT UNIQUE | Email untuk login |
-| password | TEXT | Bcrypt hash (tidak disimpan plaintext) |
-| role | TEXT | `admin` atau `petugas` |
-| created_at | DATETIME | Waktu pendaftaran |
-
-Tabel 2: `buku` (Tabel Bisnis)
-| Kolom | Tipe | Keterangan |
-|-------|------|-----------|
-| id | INTEGER PK | Auto increment |
-| judul | TEXT | Judul buku |
-| pengarang | TEXT | Nama pengarang |
-| penerbit | TEXT | Nama penerbit |
-| tahun_terbit | INTEGER | Tahun diterbitkan |
-| isbn | TEXT UNIQUE | Kode ISBN buku |
-| kategori | TEXT | Kategori/genre buku |
-| stok | INTEGER | Jumlah stok tersedia |
-| deskripsi | TEXT | Deskripsi singkat |
-| created_at | DATETIME | Waktu ditambahkan |
-| updated_at | DATETIME | Waktu terakhir diubah |
+- [👤 Identitas Mahasiswa](#-identitas-mahasiswa)
+- [📖 Tentang Proyek](#-tentang-proyek)
+- [✨ Fitur Utama](#-fitur-utama)
+- [🛠️ Teknologi yang Digunakan](#️-teknologi-yang-digunakan)
+- [🗃️ Struktur Database](#️-struktur-database)
+- [📁 Struktur Proyek](#-struktur-proyek)
+- [🚀 Instalasi & Menjalankan](#-instalasi--menjalankan)
+- [👤 Akun Default](#-akun-default)
+- [🔒 Keamanan](#-keamanan)
+- [🎓 Penutup](#-penutup)
 
 ---
 
-✨ Fitur Aplikasi
+## 👤 Identitas Mahasiswa
 
-🔐 Autentikasi
-- Halaman login dengan validasi form
-- Password dienkripsi menggunakan **bcrypt** (salt rounds: 10)
-- Sistem autentikasi menggunakan **JWT (JSON Web Token)**
-- Token berlaku selama 8 jam
-- Semua halaman CRUD dilindungi middleware auth
-- Auto-redirect ke login jika token tidak valid/expired
-
-📚 CRUD Data Buku
-- **Create** — Tambah buku baru dengan form modal
-- **Read** — Tampilkan tabel buku dengan fitur pencarian & filter kategori
-- **Update** — Edit data buku melalui form modal yang pre-filled
-- **Delete** — Hapus buku dengan konfirmasi dialog
-
-👥 CRUD Data Pengguna (Admin Only)
-- Tambah, edit, hapus akun pengguna
-- Role-based access control (Admin vs Petugas)
-- Petugas hanya bisa melihat daftar pengguna
-
-📊 Dashboard
-- Statistik ringkasan (total buku, stok, kategori, pengguna)
-- Daftar buku terbaru
-- Info akun yang sedang login
+| Field           | Detail              |
+|-----------------|---------------------|
+| **Nama**        | Irfan Nur Sofiyanto |
+| **NIM**         | 220103179           |
+| **Kelas**       | 22TIA6              |
+| **Mata Kuliah** | Pemrograman Web     |
+| **Dosen**       | Bapak Sopingi       |
 
 ---
 
-🛠️ Teknologi yang Digunakan
+## 📖 Tentang Proyek
 
-| Layer | Teknologi |
-|-------|-----------|
-| Backend | Node.js + Express.js |
-| Database | SQLite (via better-sqlite3) |
-| Autentikasi | JWT (jsonwebtoken) |
-| Enkripsi | bcryptjs |
-| Frontend | HTML5 + CSS3 + Vanilla JavaScript (SPA) |
-| Font | Google Fonts (Playfair Display + DM Sans) |
+Proyek ini merupakan sistem manajemen perpustakaan digital bernama **BiblioTech**, dibangun sebagai bagian dari **Uji Kompetensi Kejuruan (UJK)** pada mata kuliah Pemrograman Web.
+
+Sistem ini menggantikan metode manual atau spreadsheet dengan aplikasi berbasis web yang lebih terstruktur, aman, dan mudah digunakan oleh admin maupun petugas perpustakaan.
 
 ---
 
-🚀 Cara Menjalankan
+## ✨ Fitur Utama
 
-Prasyarat
-- Node.js versi 16+ ([download](https://nodejs.org))
-- npm (sudah include dengan Node.js)
+### 🔐 Autentikasi
+- Login dengan validasi form
+- Password dienkripsi menggunakan **bcrypt**
+- Autentikasi berbasis **JWT** (berlaku 8 jam)
+- Proteksi halaman dengan middleware auth
 
-Langkah Instalasi
+### 📚 Manajemen Buku
+- Tambah, lihat, edit, dan hapus buku (CRUD)
+- Pencarian buku berdasarkan judul / pengarang
+- Filter berdasarkan kategori
 
-```bash
-# 1. Clone atau download project ini
-git clone https://github.com/[username]/sistem-perpustakaan.git
+### 👥 Manajemen User *(khusus Admin)*
+- CRUD data pengguna
+- Role-based access control (Admin / Petugas)
+- Petugas hanya dapat melihat data
 
-# 2. Masuk ke folder project
-cd sistem-perpustakaan
-
-# 3. Install dependencies
-npm install
-
-# 4. Jalankan server
-npm start
-```
-
-Server akan berjalan di **http://localhost:3000**
-
-Akun Default
-
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@perpustakaan.com | admin123 |
-| Petugas | budi@perpustakaan.com | petugas123 |
-
-> **Catatan:** Database SQLite (`perpustakaan.db`) akan dibuat otomatis di folder `database/` saat pertama kali server dijalankan, beserta data awal (seed data).
+### 📊 Dashboard
+- Statistik jumlah buku dan pengguna
+- Informasi akun yang sedang login
+- Data buku terbaru
 
 ---
 
-📁 Struktur Folder
+## 🛠️ Teknologi yang Digunakan
+
+| Layer    | Teknologi               |
+|----------|-------------------------|
+| Backend  | Node.js + Express.js    |
+| Database | SQLite (better-sqlite3) |
+| Auth     | JSON Web Token (JWT)    |
+| Security | bcrypt                  |
+| Frontend | HTML, CSS, JavaScript   |
+
+---
+
+## 🗃️ Struktur Database
+
+### 🔐 Tabel `users`
+
+| Kolom        | Tipe       | Keterangan        |
+|--------------|------------|-------------------|
+| `id`         | INTEGER PK | Auto increment    |
+| `nama`       | TEXT       | Nama pengguna     |
+| `email`      | TEXT       | Email login       |
+| `password`   | TEXT       | Hash bcrypt       |
+| `role`       | TEXT       | `admin`/`petugas` |
+| `created_at` | DATETIME   | Waktu dibuat      |
+
+### 📚 Tabel `buku`
+
+| Kolom          | Tipe       | Keterangan       |
+|----------------|------------|------------------|
+| `id`           | INTEGER PK | Auto increment   |
+| `judul`        | TEXT       | Judul buku       |
+| `pengarang`    | TEXT       | Nama pengarang   |
+| `penerbit`     | TEXT       | Nama penerbit    |
+| `tahun_terbit` | INTEGER    | Tahun terbit     |
+| `isbn`         | TEXT       | Nomor ISBN       |
+| `kategori`     | TEXT       | Genre / kategori |
+| `stok`         | INTEGER    | Jumlah stok      |
+| `deskripsi`    | TEXT       | Deskripsi buku   |
+| `created_at`   | DATETIME   | Waktu dibuat     |
+| `updated_at`   | DATETIME   | Waktu diupdate   |
+
+---
+
+## 📁 Struktur Proyek
 
 ```
 sistem-perpustakaan/
 ├── src/
-│   └── server.js          # Backend Express + API Routes
+│   └── server.js
 ├── public/
-│   ├── index.html         # SPA utama
+│   ├── index.html
 │   ├── css/
-│   │   └── style.css      # Stylesheet
 │   └── js/
-│       └── app.js         # Frontend JavaScript
 ├── database/
-│   ├── perpustakaan.sql   # Export database (schema + seed)
-│   └── perpustakaan.db    # File database SQLite (auto-generated)
+│   ├── perpustakaan.sql
+│   └── perpustakaan.db
 ├── package.json
 └── README.md
 ```
 
 ---
 
-🔒 Keamanan
+## 🚀 Instalasi & Menjalankan
 
-- Password **tidak pernah** disimpan dalam bentuk plaintext
-- Setiap password di-hash dengan bcrypt sebelum disimpan
-- Semua endpoint API dilindungi dengan JWT middleware
-- Role-based access control untuk operasi sensitif
-- Input di-escape untuk mencegah XSS
+### 🔧 Prasyarat
+
+- Node.js versi **16+**
+- npm
+
+### 📥 Langkah Instalasi
+
+```bash
+# Clone repositori
+git clone https://github.com/wryzz/UJK-Irfan-Nur-Sofiyanto.git
+
+# Masuk ke folder proyek
+cd sistem-perpustakaan
+
+# Install dependensi
+npm install
+
+# Jalankan server
+npm start
+```
+
+### 🌐 Akses Aplikasi
+
+Buka browser dan akses:
+
+```
+http://localhost:3000
+```
 
 ---
 
-📸 Tampilan Aplikasi
+## 👤 Akun Default
 
-- **Halaman Login** — Split layout dengan branding di kiri, form login di kanan
-- **Dashboard** — Kartu statistik + daftar buku terbaru + info akun  
-- **Data Buku** — Tabel dengan pencarian, filter kategori, dan badge stok berwarna
-- **Data Pengguna** — Manajemen user dengan role badge (khusus admin)
+| Role        | Email                    | Password     |
+|-------------|--------------------------|--------------|
+| 👑 Admin    | `admin@perpustakaan.com` | `admin123`   |
+| 👷 Petugas  | `budi@perpustakaan.com`  | `petugas123` |
 
 ---
 
-*Dibuat untuk memenuhi UJK*
+## 🔒 Keamanan
+
+- ✅ Password tidak disimpan dalam bentuk plaintext
+- ✅ Hashing password menggunakan **bcrypt**
+- ✅ Proteksi endpoint dengan **JWT**
+- ✅ Role-based access control (RBAC)
+- ✅ Validasi input untuk mencegah **XSS**
+
+---
+
+## 🎓 Penutup
+
+> Proyek **BiblioTech** dibuat untuk memenuhi tugas **Uji Kompetensi Kejuruan (UJK)**
+> pada mata kuliah Pemrograman Web.
+
+<div align="center">
+
+Dikembangkan dengan ❤️ oleh **Irfan Nur Sofiyanto** — NIM 220103179 | Kelas 22TIA6
+
+</div>
