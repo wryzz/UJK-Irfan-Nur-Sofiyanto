@@ -1,16 +1,6 @@
-<div align="center">
-
 # 📚 BiblioTech — Sistem Manajemen Perpustakaan
 
-Aplikasi web berbasis **Node.js + Express.js** untuk mengelola data perpustakaan secara digital.
-Dilengkapi dengan sistem autentikasi, fitur CRUD lengkap, pencarian & filter kategori, serta dashboard monitoring.
-
-![Node.js](https://img.shields.io/badge/Node.js-16+-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
-
-</div>
+Aplikasi web berbasis **Node.js + Express.js** untuk mengelola data perpustakaan secara digital. Dilengkapi dengan sistem autentikasi, fitur CRUD lengkap, pencarian & filter kategori, serta dashboard monitoring.
 
 ---
 
@@ -25,6 +15,7 @@ Dilengkapi dengan sistem autentikasi, fitur CRUD lengkap, pencarian & filter kat
 - [🚀 Instalasi & Menjalankan](#-instalasi--menjalankan)
 - [👤 Akun Default](#-akun-default)
 - [🔒 Keamanan](#-keamanan)
+- [📸 Tampilan Aplikasi](#-tampilan-aplikasi)
 - [🎓 Penutup](#-penutup)
 
 ---
@@ -62,7 +53,7 @@ Sistem ini menggantikan metode manual atau spreadsheet dengan aplikasi berbasis 
 - Pencarian buku berdasarkan judul / pengarang
 - Filter berdasarkan kategori
 
-### 👥 Manajemen User *(khusus Admin)*
+### 👥 Manajemen User (Admin)
 - CRUD data pengguna
 - Role-based access control (Admin / Petugas)
 - Petugas hanya dapat melihat data
@@ -90,30 +81,30 @@ Sistem ini menggantikan metode manual atau spreadsheet dengan aplikasi berbasis 
 
 ### 🔐 Tabel `users`
 
-| Kolom        | Tipe       | Keterangan        |
-|--------------|------------|-------------------|
-| `id`         | INTEGER PK | Auto increment    |
-| `nama`       | TEXT       | Nama pengguna     |
-| `email`      | TEXT       | Email login       |
-| `password`   | TEXT       | Hash bcrypt       |
-| `role`       | TEXT       | `admin`/`petugas` |
-| `created_at` | DATETIME   | Waktu dibuat      |
+| Kolom      | Tipe         | Keterangan        |
+|------------|--------------|-------------------|
+| id         | INTEGER PK   | Auto increment    |
+| nama       | TEXT         | Nama pengguna     |
+| email      | TEXT         | Email login       |
+| password   | TEXT         | Hash bcrypt       |
+| role       | TEXT         | `admin`/`petugas` |
+| created_at | DATETIME     | Waktu dibuat      |
 
 ### 📚 Tabel `buku`
 
-| Kolom          | Tipe       | Keterangan       |
-|----------------|------------|------------------|
-| `id`           | INTEGER PK | Auto increment   |
-| `judul`        | TEXT       | Judul buku       |
-| `pengarang`    | TEXT       | Nama pengarang   |
-| `penerbit`     | TEXT       | Nama penerbit    |
-| `tahun_terbit` | INTEGER    | Tahun terbit     |
-| `isbn`         | TEXT       | Nomor ISBN       |
-| `kategori`     | TEXT       | Genre / kategori |
-| `stok`         | INTEGER    | Jumlah stok      |
-| `deskripsi`    | TEXT       | Deskripsi buku   |
-| `created_at`   | DATETIME   | Waktu dibuat     |
-| `updated_at`   | DATETIME   | Waktu diupdate   |
+| Kolom        | Tipe       | Keterangan      |
+|--------------|------------|-----------------|
+| id           | INTEGER PK | Auto increment  |
+| judul        | TEXT       | Judul buku      |
+| pengarang    | TEXT       | Nama pengarang  |
+| penerbit     | TEXT       | Nama penerbit   |
+| tahun_terbit | INTEGER    | Tahun terbit    |
+| isbn         | TEXT       | Nomor ISBN      |
+| kategori     | TEXT       | Genre / kategori|
+| stok         | INTEGER    | Jumlah stok     |
+| deskripsi    | TEXT       | Deskripsi buku  |
+| created_at   | DATETIME   | Waktu dibuat    |
+| updated_at   | DATETIME   | Waktu diupdate  |
 
 ---
 
@@ -146,16 +137,9 @@ sistem-perpustakaan/
 ### 📥 Langkah Instalasi
 
 ```bash
-# Clone repositori
 git clone https://github.com/wryzz/UJK-Irfan-Nur-Sofiyanto.git
-
-# Masuk ke folder proyek
 cd sistem-perpustakaan
-
-# Install dependensi
 npm install
-
-# Jalankan server
 npm start
 ```
 
@@ -171,10 +155,10 @@ http://localhost:3000
 
 ## 👤 Akun Default
 
-| Role        | Email                    | Password     |
-|-------------|--------------------------|--------------|
-| 👑 Admin    | `admin@perpustakaan.com` | `admin123`   |
-| 👷 Petugas  | `budi@perpustakaan.com`  | `petugas123` |
+| Role    | Email                    | Password     |
+|---------|--------------------------|--------------|
+| Admin   | admin@perpustakaan.com   | `admin123`   |
+| Petugas | budi@perpustakaan.com    | `petugas123` |
 
 ---
 
@@ -188,13 +172,18 @@ http://localhost:3000
 
 ---
 
+## 📸 Tampilan Aplikasi
+
+| Halaman      | Deskripsi                        |
+|--------------|----------------------------------|
+| 🔑 Login     | Form login dengan validasi       |
+| 📊 Dashboard | Statistik dan ringkasan data     |
+| 📚 Data Buku | Daftar, tambah, edit, hapus buku |
+| 👥 Data User | Manajemen pengguna (khusus admin)|
+
+---
+
 ## 🎓 Penutup
 
-> Proyek **BiblioTech** dibuat untuk memenuhi tugas **Uji Kompetensi Kejuruan (UJK)**
-> pada mata kuliah Pemrograman Web.
-
-<div align="center">
-
-Dikembangkan dengan ❤️ oleh **Irfan Nur Sofiyanto** — NIM 220103179 | Kelas 22TIA6
-
-</div>
+> Proyek **BiblioTech** dibuat untuk memenuhi tugas **Uji Kompetensi Kejuruan (UJK)** pada mata kuliah Pemrograman Web.  
+> Dikembangkan dengan oleh **Irfan Nur Sofiyanto** — NIM 220103179, Kelas 22TIA6.
